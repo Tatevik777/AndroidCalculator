@@ -14,74 +14,65 @@ public class MainActivity extends AppCompatActivity {
     //Объявляем все кнопки калькулятора, экран и переменные ввод и ответ;
 
     private TextView Screen;
-    private Button AC, Back, Div, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Zero,
-            Equals, Multiply, Minus, Plus, Point;
-    private String input, Answer;
+    private String input="",Answer;
+    private boolean clearResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Screen = findViewById(R.id.screen);
-        //Инициализируем экран и кнопки
-
-        One = findViewById(R.id.one);
-        Two = findViewById(R.id.two);
-        Three = findViewById(R.id.three);
-        Four = findViewById(R.id.four);
-        Five = findViewById(R.id.five);
-        Six = findViewById(R.id.six);
-        Seven = findViewById(R.id.seven);
-        Eight = findViewById(R.id.eight);
-        Nine = findViewById(R.id.nine);
-        Zero = findViewById(R.id.zero);
-
-        AC = findViewById(R.id.ac);
-        Back = findViewById(R.id.back);
-        Div = findViewById(R.id.div);
-        Multiply = findViewById(R.id.multiply);
-        Minus = findViewById(R.id.minus);
-        Plus = findViewById(R.id.plus);
-        Point = findViewById(R.id.point);
-        Equals = findViewById(R.id.equal);
+       
     }
 
     // Метод для инициализации действия кнопок
-    public void ButtonClick(View view) {
+
+    public void onClick(View view) {
         Button button = (Button) view;
+
         String data = button.getText().toString();// получаем текст из кнопок
         //Описываем действия для каждой кнопки
         switch (data) {
             case "AC":
                 input = " ";
+                clearResult=false;
                 break;
             case "x":
+                clearResult=false;
                 Logic();
                 input += "*";
                 break;
 
             case "=":
+                clearResult=true;
                 Logic();
                 Answer = input;
                 break;
 
             case "←":
-                String newText = input.substring(0, input.length() - 1);
-                input = newText;
-                break;
-
-            default:
-                if (input == null) {
-                    input = "";
+                if(input.length()>0){
+                    clearResult=false;
+                    String newText=input.substring(0,input.length()-1);
+                    input=newText;
                 }
-                if (data.equals("+") || data.equals("-") || data.equals("/")) {
+                break;
+            default:
+                if(input==null){
+                    input="";
+                }
+                if(data.equals("+") || data.equals("-") || data.equals("/")){
+                    clearResult=false;
                     Logic();
                 }
-                input += data;
-                // если в данных есть знак + , - или деление , то вызывает метод
-                // с логикой калькулятора
+                else if(clearResult==true){
+                    input="";
+                    clearResult=false;
+                }
+                input+=data;
         }
+
         Screen.setText(input);// и добавляем данные на экран
+
     }
 
     //Логика калькулятора
@@ -144,3 +135,5 @@ public class MainActivity extends AppCompatActivity {
         Screen.setText(input);
     }
 }
+
+
