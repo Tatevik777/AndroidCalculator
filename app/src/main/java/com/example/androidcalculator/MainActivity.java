@@ -1,4 +1,5 @@
 package com.example.androidcalculator;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    Button  AC, Back, Div, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Zero,
+    Button AC, Back, Div, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Zero,
             Equals, Multiply, Minus, Plus, Point;
     Float v1, v2;
     boolean ifadd, ifdiv, ifmul, ifsub;
@@ -23,26 +24,26 @@ public class MainActivity extends AppCompatActivity {
 
         One = findViewById(R.id.one);
         Two = findViewById(R.id.two);
-        Three= findViewById(R.id.three);
+        Three = findViewById(R.id.three);
         Four = findViewById(R.id.four);
         Five = findViewById(R.id.five);
-       Six= findViewById(R.id.six);
+        Six = findViewById(R.id.six);
         Seven = findViewById(R.id.seven);
         Eight = findViewById(R.id.eight);
         Nine = findViewById(R.id.nine);
         Zero = findViewById(R.id.zero);
-        Point=findViewById(R.id.point);
+        Point = findViewById(R.id.point);
 
 
         Multiply = findViewById(R.id.multiply);
         Equals = findViewById(R.id.equals);
-        Plus= findViewById(R.id.plus);
-        Minus=findViewById(R.id.minus);
-        Div=findViewById(R.id.div);
-        AC=findViewById(R.id.ac);
-        Back=findViewById(R.id.back);
+        Plus = findViewById(R.id.plus);
+        Minus = findViewById(R.id.minus);
+        Div = findViewById(R.id.div);
+        AC = findViewById(R.id.ac);
+        Back = findViewById(R.id.back);
 
-       One.setOnClickListener(new View.OnClickListener() {
+        One.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 screen.setText(screen.getText() + "1");
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
                 screen.setText(screen.getText() + "2");
             }
         });
-       Three.setOnClickListener(new View.OnClickListener() {
+        Three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 screen.setText(screen.getText() + "3");
             }
         });
-      Four.setOnClickListener(new View.OnClickListener() {
+        Four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 screen.setText(screen.getText() + "4");
@@ -111,16 +112,16 @@ public class MainActivity extends AppCompatActivity {
         Plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                v1= Float.valueOf(screen.getText()+"");
-                ifadd=true;
+                v1 = Float.valueOf(screen.getText() + "");
+                ifadd = true;
                 screen.setText(null);
             }
         });
         Minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                v1= Float.valueOf(screen.getText()+ "");
-                ifsub=true;
+                v1 = Float.valueOf(screen.getText() + "");
+                ifsub = true;
                 screen.setText(null);
             }
         });
@@ -135,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
         Div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                v1= Float.valueOf(screen.getText()+"");
-                ifdiv=true;
+                v1 = Float.valueOf(screen.getText() + "");
+                ifdiv = true;
                 screen.setText(null);
             }
         });
@@ -172,10 +173,9 @@ public class MainActivity extends AppCompatActivity {
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String res=screen.getText().toString();
-                if (res.length()>0)
-                {
-                    res=res.substring(0,res.length()-1);
+                String res = screen.getText().toString();
+                if (res.length() > 0) {
+                    res = res.substring(0, res.length() - 1);
                     screen.setText(res);
                 }
             }
