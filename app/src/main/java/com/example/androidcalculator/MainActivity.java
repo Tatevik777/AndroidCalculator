@@ -1,139 +1,192 @@
 package com.example.androidcalculator;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.Serializable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    //Объявляем все кнопки калькулятора, экран и переменные ввод и ответ;
-
-    private TextView Screen;
-    private String input="",Answer;
-    private boolean clearResult;
+    Button  AC, Back, Div, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Zero,
+            Equals, Multiply, Minus, Plus, Point;
+    Float v1, v2;
+    boolean ifadd, ifdiv, ifmul, ifsub;
+    TextView screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Screen = findViewById(R.id.screen);
-       
-    }
+        screen = findViewById(R.id.screen);
 
-    // Метод для инициализации действия кнопок
+        One = findViewById(R.id.one);
+        Two = findViewById(R.id.two);
+        Three= findViewById(R.id.three);
+        Four = findViewById(R.id.four);
+        Five = findViewById(R.id.five);
+       Six= findViewById(R.id.six);
+        Seven = findViewById(R.id.seven);
+        Eight = findViewById(R.id.eight);
+        Nine = findViewById(R.id.nine);
+        Zero = findViewById(R.id.zero);
+        Point=findViewById(R.id.point);
 
-    public void onClick(View view) {
-        Button button = (Button) view;
 
-        String data = button.getText().toString();// получаем текст из кнопок
-        //Описываем действия для каждой кнопки
-        switch (data) {
-            case "AC":
-                input = " ";
-                clearResult=false;
-                break;
-            case "x":
-                clearResult=false;
-                Logic();
-                input += "*";
-                break;
+        Multiply = findViewById(R.id.multiply);
+        Equals = findViewById(R.id.equals);
+        Plus= findViewById(R.id.plus);
+        Minus=findViewById(R.id.minus);
+        Div=findViewById(R.id.div);
+        AC=findViewById(R.id.ac);
+        Back=findViewById(R.id.back);
 
-            case "=":
-                clearResult=true;
-                Logic();
-                Answer = input;
-                break;
-
-            case "←":
-                if(input.length()>0){
-                    clearResult=false;
-                    String newText=input.substring(0,input.length()-1);
-                    input=newText;
+       One.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "1");
+            }
+        });
+        Two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "2");
+            }
+        });
+       Three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "3");
+            }
+        });
+      Four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "4");
+            }
+        });
+        Five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "5");
+            }
+        });
+        Six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "6");
+            }
+        });
+        Seven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "7");
+            }
+        });
+        Eight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "8");
+            }
+        });
+        Nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "9");
+            }
+        });
+        Zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + "0");
+            }
+        });
+        Point.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText(screen.getText() + ".");
+            }
+        });
+        Plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                v1= Float.valueOf(screen.getText()+"");
+                ifadd=true;
+                screen.setText(null);
+            }
+        });
+        Minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                v1= Float.valueOf(screen.getText()+ "");
+                ifsub=true;
+                screen.setText(null);
+            }
+        });
+        Multiply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                v1 = Float.valueOf(screen.getText() + "");
+                ifmul = true;
+                screen.setText(null);
+            }
+        });
+        Div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                v1= Float.valueOf(screen.getText()+"");
+                ifdiv=true;
+                screen.setText(null);
+            }
+        });
+        Equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                v2 = Float.parseFloat(screen.getText() + "");
+                if (ifadd == true) {
+                    screen.setText(v1 + v2 + "");
+                    ifadd = false;
                 }
-                break;
-            default:
-                if(input==null){
-                    input="";
+                if (ifsub == true) {
+                    screen.setText(v1 - v2 + "");
+                    ifsub = false;
                 }
-                if(data.equals("+") || data.equals("-") || data.equals("/")){
-                    clearResult=false;
-                    Logic();
+                if (ifmul == true) {
+                    screen.setText(v1 * v2 + "");
+                    ifmul = false;
                 }
-                else if(clearResult==true){
-                    input="";
-                    clearResult=false;
-                }
-                input+=data;
-        }
-
-        Screen.setText(input);// и добавляем данные на экран
-
-    }
-
-    //Логика калькулятора
-    private void Logic() {
-        // метод split для соединения операций и цифр
-        if (input.split("\\*").length == 2) {
-            String[] number = input.split("\\*");
-            try {
-                double multiply = Double.parseDouble(number[0]) * Double.parseDouble(number[1]);
-                input = multiply + "";
-            } catch (Exception e) {
-            }
-
-
-        } else if (input.split("/").length == 2) {
-            String[] number = input.split("/");
-            try {
-                double division = Double.parseDouble(number[0]) / Double.parseDouble(number[1]);
-                input = division + "";
-            } catch (Exception e) {
-            }
-
-
-        } else if (input.split("\\+").length == 2) {
-            String[] number = input.split("\\+");
-            try {
-                double sum = Double.parseDouble(number[0]) + Double.parseDouble(number[1]);
-                input = sum + "";
-            } catch (Exception ignored) {
-            }
-        } else if (input.split("-").length > 1) {
-            String[] number = input.split("-");
-            if (number[0].equals("") && number.length == 2) {
-                number[0] = 0 + "";
-            }
-            try {
-                double substraction = 0;
-                if (number.length == 2) {
-                    substraction = Double.parseDouble(number[0]) - Double.parseDouble(number[1]);
-                } else if (number.length == 3) {
-                    substraction = Double.parseDouble(number[1]) - Double.parseDouble(number[2]);
+                if (ifdiv == true) {
+                    screen.setText(v1 / v2 + "");
+                    ifdiv = false;
                 }
 
-                input = substraction + "";
-            } catch (Exception ignored) {
             }
-
-
-        }
-
-
-        String[] number = input.split("\\.");
-        if (number.length > 1) {
-            if (number[1].equals("0")) {
-                input = number[0];
+        });
+        AC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                screen.setText("");
             }
-
-
-        }
-        Screen.setText(input);
+        });
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String res=screen.getText().toString();
+                if (res.length()>0)
+                {
+                    res=res.substring(0,res.length()-1);
+                    screen.setText(res);
+                }
+            }
+        });
     }
 }
+
+
+
+
+
+
 
 
